@@ -24,12 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/images/profile-picture.jpg" sizes="any" />
-        <style>{`
-          link[rel="icon"] {
-            border-radius: 50%;
-            overflow: hidden;
-          }
-        `}</style>
       </head>
       <body className="bg-gray-100 text-gray-900">{children}</body>
     </html>
