@@ -2,13 +2,14 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 
 const educationData = [
   {
     degree: "Bachelor of Science in Software Engineering",
     institution: "Shahjalal University of Science & Technology",
     date: "Jan 2018 - Jan 2023",
-    details: "CGPA: 3.43 out of 4.00",
+    universityLink: "https://www.sust.edu/",
   },
 ];
 
@@ -61,11 +62,20 @@ const Education: React.FC = () => {
               <h3 className="text-2xl font-semibold text-blue-400 mb-2">
                 {edu.degree}
               </h3>
-              <p className="text-xl text-gray-300 mb-2">{edu.institution}</p>
-              <p className="text-lg text-gray-400 mb-2">{edu.date}</p>
-              {edu.details && (
-                <p className="text-md text-gray-400">{edu.details}</p>
-              )}
+              <div className="flex items-center mb-2">
+                <p className="text-xl text-gray-300 mr-2">{edu.institution}</p>
+                <motion.a
+                  href={edu.universityLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <ExternalLink size={18} />
+                </motion.a>
+              </div>
+              <p className="text-lg text-gray-400">{edu.date}</p>
             </motion.div>
           ))}
         </div>

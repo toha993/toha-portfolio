@@ -2,16 +2,25 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import {
+  User,
+  Briefcase,
+  Code,
+  Award,
+  FileText,
+  Presentation,
+} from "lucide-react";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    "About",
-    "Experience",
-    "Projects",
-    "Skills",
-    "Achievements",
+    { name: "About", icon: User },
+    { name: "Experience", icon: Briefcase },
+    { name: "Projects", icon: Presentation },
+    { name: "Skills", icon: Code },
+    { name: "Achievements", icon: Award },
+    { name: "Resume", icon: FileText, isDownload: true },
   ];
 
   return (
@@ -29,20 +38,29 @@ const Header: React.FC = () => {
           <ul className="flex space-x-4">
             {navItems.map((item) => (
               <motion.li
-                key={item}
+                key={item.name}
                 className="group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link
-                  href={`#${item.toLowerCase()}`}
-                  className="relative overflow-hidden px-2 py-1"
-                >
-                  <span className="relative z-10 group-hover:text-blue-400 transition-colors duration-300">
-                    {item}
-                  </span>
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </Link>
+                {item.isDownload ? (
+                  <a
+                    href="/assets/mutasim_resume.pdf"
+                    download
+                    className="flex items-center px-2 py-1 hover:text-blue-400 transition-colors duration-300"
+                  >
+                    <item.icon className="w-4 h-4 mr-1" />
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    href={`#${item.name.toLowerCase()}`}
+                    className="flex items-center px-2 py-1 hover:text-blue-400 transition-colors duration-300"
+                  >
+                    <item.icon className="w-4 h-4 mr-1" />
+                    {item.name}
+                  </Link>
+                )}
               </motion.li>
             ))}
           </ul>
@@ -79,17 +97,30 @@ const Header: React.FC = () => {
           <ul className="flex flex-col space-y-2">
             {navItems.map((item) => (
               <motion.li
-                key={item}
+                key={item.name}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Link
-                  href={`#${item.toLowerCase()}`}
-                  className="block px-2 py-1 hover:bg-gray-800 transition-colors duration-300"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item}
-                </Link>
+                {item.isDownload ? (
+                  <a
+                    href="/assets/my-cv.pdf"
+                    download
+                    className="flex items-center px-2 py-1 hover:bg-gray-800 transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <item.icon className="w-4 h-4 mr-2" />
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    href={`#${item.name.toLowerCase()}`}
+                    className="flex items-center px-2 py-1 hover:bg-gray-800 transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <item.icon className="w-4 h-4 mr-2" />
+                    {item.name}
+                  </Link>
+                )}
               </motion.li>
             ))}
           </ul>

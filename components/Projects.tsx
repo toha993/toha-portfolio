@@ -17,19 +17,20 @@ const projectsData: Project[] = [
       "Google Cloud Services",
       "GitHub",
     ],
-    link: "#",
+    link: "https://github.com/toha993/Project_X",
   },
   {
     name: "URL Shortener",
     description: "A URL shortener service built with Domain Driven Design",
     technologies: ["Go", "MongoDB", "React", "Gin Framework"],
-    link: "#",
+    link: "https://github.com/toha993/url-shortener-with-ddd",
   },
   {
     name: "Practice Yourself",
-    description: "An Android app for vocabulary preparation",
+    description:
+      "A user-friendly mobile app to enhance vocabulary learning through interactive exercises",
     technologies: ["Java", "Android SDK", "SQLite"],
-    link: "#",
+    link: "https://github.com/toha993/Practice_Yourself",
   },
 ];
 

@@ -2,17 +2,18 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { CheckCircle } from "lucide-react";
 
 const experienceData = [
   {
     title: "Software Engineer-I",
     company: "Optimizely",
-    date: "Mar 2024 - Current",
+    date: "Mar 2024 - Present",
     responsibilities: [
-      "Developing a comprehensive design library for frontend development in React",
-      "Implemented dynamic host resolution for API requests and added tests",
-      "Enhanced support and Updated publicly exposed APIs",
-      "Developed an online voting system for internal events",
+      "Developed React design library for consistent, accessible UI/UX",
+      "Implemented dynamic API host resolution with robust testing",
+      "Enhanced and updated public APIs",
+      "Created internal event voting system",
     ],
   },
   {
@@ -20,20 +21,20 @@ const experienceData = [
     company: "Orbitax",
     date: "Mar 2022 - Feb 2024",
     responsibilities: [
-      "Built and managed a module for customized client solutions",
-      "Designed and implemented a data mapping algorithm",
-      "Programmed a client support platform for real-time task assignment",
-      "Developed and executed stress tests using JMeter",
-      "Spearheaded design thinking workshops",
+      "Built module for customized client solutions",
+      "Optimized data mapping algorithm: 2 hours to 10 minutes for 10+ grid types",
+      "Developed real-time client support platform, reducing resolution time",
+      "Conducted JMeter stress tests for 1,000+ concurrent users",
+      "Led design thinking workshops, generating 5+ new features",
     ],
   },
   {
-    title: "Intern, Software Engineer",
+    title: "Software Engineer Intern",
     company: "Orbitax",
     date: "Sept 2021 - Feb 2022",
     responsibilities: [
-      "Implemented a module with Gin Framework for .Net to Golang conversion",
-      "Integrated NoSQL database into existing infrastructure",
+      "Automated .NET to Golang conversion, reducing response time by 30%",
+      "Integrated NoSQL, cutting query times by 30%",
     ],
   },
 ];
@@ -60,10 +61,20 @@ const Experience: React.FC = () => {
     },
   };
 
+  const ResponsibilityItem: React.FC<{ text: string }> = ({ text }) => (
+    <motion.li
+      className="flex items-start space-x-2 mb-2"
+      variants={itemVariants}
+    >
+      <CheckCircle className="flex-shrink-0 w-5 h-5 text-green-400" />
+      <span className="text-sm text-gray-300">{text}</span>
+    </motion.li>
+  );
+
   return (
     <section
       id="experience"
-      className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white"
+      className="py-12 md:py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white"
     >
       <motion.div
         className="container mx-auto px-4"
@@ -72,12 +83,13 @@ const Experience: React.FC = () => {
         animate="visible"
       >
         <motion.h2
-          className="text-4xl font-bold mb-12 text-center"
+          className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center"
           variants={itemVariants}
         >
           Professional Experience
         </motion.h2>
-        <div className="relative wrap overflow-hidden p-10 h-full">
+
+        <div className="hidden md:block relative wrap overflow-hidden p-10 h-full">
           <div
             className="border-2-2 absolute border-opacity-20 border-gray-500 h-full border"
             style={{ left: "50%" }}
@@ -109,17 +121,40 @@ const Experience: React.FC = () => {
                 <h4 className="mb-3 font-semibold text-gray-300 text-lg">
                   {exp.company}
                 </h4>
-                <p className="text-sm leading-snug tracking-wide text-gray-400 text-opacity-100">
+                <p className="text-sm leading-snug tracking-wide text-gray-400 text-opacity-100 mb-4">
                   {exp.date}
                 </p>
-                <ul className="list-disc list-inside mt-3">
+                <motion.ul className="space-y-2" variants={containerVariants}>
                   {exp.responsibilities.map((resp, respIndex) => (
-                    <li key={respIndex} className="text-sm text-gray-300">
-                      {resp}
-                    </li>
+                    <ResponsibilityItem key={respIndex} text={resp} />
                   ))}
-                </ul>
+                </motion.ul>
               </motion.div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="md:hidden space-y-8">
+          {experienceData.map((exp, index) => (
+            <motion.div
+              key={index}
+              className="bg-gray-700 rounded-lg shadow-xl p-6 hover:bg-gray-600 transition-colors duration-300"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <h3 className="mb-2 font-bold text-blue-400 text-xl">
+                {exp.title}
+              </h3>
+              <h4 className="mb-2 font-semibold text-gray-300 text-lg">
+                {exp.company}
+              </h4>
+              <p className="mb-4 text-sm text-gray-400">{exp.date}</p>
+              <motion.ul className="space-y-2" variants={containerVariants}>
+                {exp.responsibilities.map((resp, respIndex) => (
+                  <ResponsibilityItem key={respIndex} text={resp} />
+                ))}
+              </motion.ul>
             </motion.div>
           ))}
         </div>

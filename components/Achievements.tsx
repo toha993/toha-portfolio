@@ -1,50 +1,51 @@
 "use client";
 
 import React from "react";
-import { Achievement } from "../types";
 import { motion } from "framer-motion";
+import { ExternalLink, FileText } from "lucide-react";
+
+interface Achievement {
+  title: string;
+  pdf: string;
+  description: string;
+}
+
+interface CompetitiveProgramming {
+  platform: string;
+  link: string;
+  problemsSolved: number;
+}
 
 const achievementsData: Achievement[] = [
   {
     title: "Algorithmic Toolbox",
+    pdf: "/assets/algorithmic-toolbox.pdf",
     description:
       "Mastered essential algorithmic techniques for designing efficient algorithms, solving complex problems, and implementing reliable solutions for real-world scenarios and technical interviews.",
   },
   {
-    title: "Government Scholarship",
-    description: "HSC 2017, Notre Dame College, Dhaka, Bangladesh",
-  },
-  {
-    title: "Government Scholarship",
-    description: "SSC 2015, Cumilla Zilla School, Cumilla, Bangladesh",
-  },
-  {
-    title: "Government Scholarship",
-    description: "JSC 2012, Cumilla Zilla School, Cumilla, Bangladesh",
-  },
-  {
-    title: "Competitive Programming",
+    title: "Namaste React",
+    pdf: "/assets/namaste-react.webp",
     description:
-      "Solved 500+ problems on CodeForces, 150+ problems on UVa, and 70+ problems on CodeChef",
+      "Mastered essential React concepts and techniques for building dynamic, production-ready web applications, including component design, state management, routing, and performance optimization, equipping you to tackle complex development challenges and excel in technical interviews.",
+  },
+];
+
+const competitiveProgrammingData: CompetitiveProgramming[] = [
+  {
+    platform: "CodeForces",
+    link: "https://codeforces.com/profile/Henrick993",
+    problemsSolved: 500,
   },
   {
-    title: "SUST Engagement",
-    description:
-      "Organized problem-solving contest in SWE department, enhancing students' algorithmic and coding skills. Volunteered in SUST Admission processes (2018, 2019) and SUST SWE Technovent 2023.",
+    platform: "UVa",
+    link: "http://uhunt.felix-halim.net/id/952077",
+    problemsSolved: 150,
   },
   {
-    title: "Student Mentorship",
-    description:
-      "Guided newly admitted and final-year Software Engineering students in academic and professional development, including job search strategies.",
-  },
-  {
-    title: "Industry Contribution",
-    description: "Served as Problem Setter for Orbitax Recruitment 2023",
-  },
-  {
-    title: "Sports Achievements",
-    description:
-      "Champion, Intra IICT Inter Football Tournament 2019 and Intra SWE Cricket Tournament 2022",
+    platform: "CodeChef",
+    link: "https://www.codechef.com/users/henrick993",
+    problemsSolved: 70,
   },
 ];
 
@@ -73,7 +74,7 @@ const Achievements: React.FC = () => {
   return (
     <section
       id="achievements"
-      className="py-20 bg-gradient-to-b from-gray-800 to-gray-900 text-white"
+      className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white"
     >
       <motion.div
         className="container mx-auto px-4"
@@ -87,20 +88,70 @@ const Achievements: React.FC = () => {
         >
           Achievements & Certificates
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {achievementsData.map((achievement, index) => (
-            <motion.div
-              key={index}
-              className="bg-gray-700 rounded-lg shadow-lg p-6 hover:bg-gray-600 transition-all duration-300"
-              variants={itemVariants}
-              whileHover={{ scale: 1.03 }}
-            >
-              <h3 className="text-xl font-semibold text-blue-400 mb-2">
-                {achievement.title}
-              </h3>
-              <p className="text-gray-300">{achievement.description}</p>
-            </motion.div>
-          ))}
+
+        <div className="grid md:grid-cols-2 gap-8">
+          <motion.div variants={itemVariants}>
+            <h3 className="text-2xl font-semibold mb-4 text-blue-400">
+              Certifications
+            </h3>
+            {achievementsData.map((achievement, index) => (
+              <motion.div
+                key={index}
+                className="bg-gray-700 rounded-lg p-6 mb-6 hover:bg-gray-600 transition-colors duration-300"
+                variants={itemVariants}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-xl font-semibold text-blue-300">
+                    {achievement.title}
+                  </h4>
+                  <motion.a
+                    href={achievement.pdf}
+                    download
+                    className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <FileText size={18} />
+                  </motion.a>
+                </div>
+                <p className="text-gray-300">{achievement.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div variants={itemVariants}>
+            <h3 className="text-2xl font-semibold mb-4 text-blue-400">
+              Competitive Programming
+            </h3>
+            <div className="bg-gray-700 rounded-lg p-6 hover:bg-gray-600 transition-colors duration-300">
+              {competitiveProgrammingData.map((platform, index) => (
+                <motion.div
+                  key={index}
+                  className="mb-4 last:mb-0"
+                  variants={itemVariants}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-xl font-semibold text-blue-300">
+                      {platform.platform}
+                    </h4>
+                    <motion.a
+                      href={platform.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <ExternalLink size={18} />
+                    </motion.a>
+                  </div>
+                  <p className="text-gray-300">
+                    Solved {platform.problemsSolved}+ problems
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

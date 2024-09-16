@@ -11,14 +11,14 @@ import Footer from "../components/Footer";
 
 const Home: React.FC = () => {
   return (
-    <main className="min-h-screen bg-gray-800">
+    <main className="min-h-screen bg-gray-900">
       <Header />
-      <div className="">
+      <div className="py-10">
         <About />
-        <Education />
         <Experience />
-        <Projects />
         <Skills />
+        <Projects />
+        <Education />
         <Achievements />
       </div>
       <Footer />
