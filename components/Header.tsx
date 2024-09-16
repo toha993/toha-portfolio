@@ -103,7 +103,7 @@ const Header: React.FC = () => {
               >
                 {item.isDownload ? (
                   <a
-                    href="/assets/my-cv.pdf"
+                    href="/assets/mutasim_resume.pdf"
                     download
                     className="flex items-center px-2 py-1 hover:bg-gray-800 transition-colors duration-300"
                     onClick={() => setIsOpen(false)}
